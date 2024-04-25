@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="main w-full text-white min-h-screen bg-zinc-900">
+        <div class="form">
+            <form action="/create" method="post" class="px-10 py-10">
+                <input name="file" type="text" class="block w-full px-5 py-2 rounded-md outline-none bg-zinc-800" placeholder="Task Name">
+                <textarea name="content" class="block w-full px-5 mt-2 py-2 rounded-md resize-none bg-zinc-800 outline-none" placeholder="write something about text..."></textarea>
+                <input class="py-3 px-10 text-md bg-blue-600 rounded-md mt-2" type="submit">
+            </form>
+        </div>
+
+            <div class="tasks flex gap-4 flex-wrap px-10 py-20">
+            
+                <% if(arr.length > 0) { %>
+
+                <% arr.forEach(function(obj){%>
+                    <div class="task w-72 p-3 bg-zinc-800 rounded-lg">
+                        <h1 class="text-3xl tracking-tighter "><%= obj.name%></h1>
+                        <h6 class="  text-xs tracking-tighter mt-[-2px] text-zinc-500" ><%= obj.date %></h6>
+                        <p>
+                            <% if(obj.content.length > 16){%>
+
+                                <%= obj.content.substring(0,16)%>...
+                                <% }else{ %>
+                                    
+                                    <%= obj.content%>
+
+                                <%}%>
+                        </p>
+                        <a href="/read/<%= obj.name %>" class="text-blue-500 mt-3 inline-block">read more</a>
+                        <a href="/edit/<%= obj.name %>" class="text-zinc-500 mt-3 ml-20 inline-block">edit</a>
+                        <a href="/delete/<%= obj.name %>" class="text-red-500 mt-3 ml-3 inline-block">delete</a>
+
+                    </div>
+                <% })} else {%>
+
+
+                    <h3 class="text-xl text-zinc-700">no tasks yet</h3>
+                <%}%>
+
+            </div>
+    </div>
+</body>
+</html>
